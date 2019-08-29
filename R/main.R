@@ -65,7 +65,7 @@ read_bis <- function(path) {
 #' datasets <- get_datasets()
 get_datasets <- function() {
   url <- complete_url("/statistics/full_data_sets.htm")
-  page <- xml2::read_html(url)
+  page <- xml2::read_html(httr::GET(url))
   nodes <- rvest::html_nodes(page, xpath = "//a[contains(@href, 'zip')]")
 
   dplyr::tibble(name = rvest::html_text(nodes),
